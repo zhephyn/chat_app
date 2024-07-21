@@ -22,3 +22,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+# chat_app
+Realtime Chat Application made with Ruby on Rails and Action Cable
