@@ -1,7 +1,8 @@
 <h1>Lists of all Groups</h1>
-<%= @groups.each do |group| %>
+<% @groups.each do |group| %>
     <ul>
         <li><%= group.name %></li>
+        <%= link_to "View Group Details", group_path(group) , method: :get %>
     </ul>
 <% end %>
 <%= link_to "Create New Group", new_group_path , method: :get %>

@@ -2,3 +2,4 @@
 <p>Name of Group: <%= @group.name %> </p>
 <%= link_to "Edit Group", edit_group_path(@group), method: :get %>
 <%= link_to "Destroy Group",group_path(@group), method: :delete %>
+<%= link_to "Back to groups list",groups_path, method: :get %>

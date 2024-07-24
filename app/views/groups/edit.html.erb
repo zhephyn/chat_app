@@ -1,6 +1,6 @@
 <h1>Update existing group</h1>
-<%= form_with model: @group do |form| %>
+<%= form_with model: @group, url: edit_group_path do |form| %>
     <%= form.label :name %>
     <%= form.text_field :name %>
-    <%= form.submit "Create new group"%>
+    <%= form.submit "Edit group details"%>
 <% end %>
