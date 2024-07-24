@@ -1,0 +1,4 @@
+<h1>Individual group details</h1>
+<p>Name of Group: <%= @group.name %> </p>
+<%= link_to "Edit Group", edit_group_path(@group), method: :get %>
+<%= link_to "Destroy Group",group_path(@group), method: :delete %>

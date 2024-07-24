@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  resources :groups
+  root "groups#index"
   devise_for :users
-  root "welcome#home"
+  get "/welcome", to: "welcome#home"
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
