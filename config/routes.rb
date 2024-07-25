@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :groups
+  resources :groups do
+    resources :messages
+  end 
   root "groups#index"
   devise_for :users
   get "/welcome", to: "welcome#home"

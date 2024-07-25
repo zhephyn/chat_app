@@ -1,5 +1,20 @@
 <h1>Individual group details</h1>
-<p>Name of Group: <%= @group.name %> </p>
+<div id ="chat-interface">
+    <p>Name of Group: <%= @group.name %> </p>
+    <h2>Messages</h2>
+    <% @group.messages.each do |message| %>
+        <%= message.content %>
+    <% end %>
+
+    <%= @message.content %>
+</div>
+
+<%= form_with model: [@group, @message], url: group_messages_path(@group) do |form| %>
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+    <%= form.submit "Create Message" %>
+<% end %>
+
 <%= link_to "Edit Group", edit_group_path(@group), method: :get %>
 <%= link_to "Destroy Group",group_path(@group), method: :delete %>
 <%= link_to "Back to groups list",groups_path, method: :get %>
