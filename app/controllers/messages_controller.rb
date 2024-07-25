@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+    before_action :authenticate_user!
     def index
         @messages = Message.all
     end
@@ -13,7 +14,6 @@ class MessagesController < ApplicationController
 
     def create
         @group = Group.find(params[:group_id])
-        group_name = @group.name
         @message = @group.messages.build(message_params)
         if @message.save
             ActionCable.server.broadcast("group_#{@group.name}", {message: @message.content, group: @message.group.name})

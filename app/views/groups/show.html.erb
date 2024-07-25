@@ -3,7 +3,7 @@
     <h2>Messages</h2>
     <% @group.messages.each do |message| %>
         <div>
-            <%= message.content %>
+            <p><%= message.user.email %> said <%= message.content %></p>
         </div>
     <% end %>
 </div>
