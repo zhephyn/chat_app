@@ -16,7 +16,7 @@ class MessagesController < ApplicationController
         group_name = @group.name
         @message = @group.messages.build(message_params)
         if @message.save
-            redirect_to group_message_path(@group, @message), notice: "Successfully created message"
+            redirect_to group_path(@group), notice: "Successfully created message"
 
         else
             render :new
