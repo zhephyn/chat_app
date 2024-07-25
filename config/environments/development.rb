@@ -65,6 +65,7 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
+  config.cache_store = :redis_cache_store, { url: 'redis://localhost:6379/1' }
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
