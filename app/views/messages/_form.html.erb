@@ -1,0 +1,17 @@
+<h1>Message Partial</h1>
+<%= form_with model: @message, local: true do |form| %>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, rows: 3 %>
+  </div>
+
+  <% if @group %>
+    <%= form.hidden_field :group_id, value: @group.id %>
+  <% else @recipient %>
+    <%= form.hidden_field :recipient_id, value: @recipient.id %>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit "Send Message" %>
+  </div>
+<% end %>

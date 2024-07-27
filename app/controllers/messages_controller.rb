@@ -13,19 +13,18 @@ class MessagesController < ApplicationController
     end
 
     def create
-        @group = Group.find(params[:group_id])
-        @message = @group.messages.build(message_params)
-        if @message.save
-            ActionCable.server.broadcast("group_#{@group.name}", {message: @message.content, group: @message.group.name})
-            #redirect_to group_path(@group), notice: "Successfully created message"
+        @message = current_user.sent_messages.build(message_params)
+        @message.save
+        if @message.group
+            ActionCable.server.broadcast("group_#{@message.group.name}", {message: @message.content, group: @message.group})
         else
-            render :new
+            ActionCable.server.broadcast("user_#{@message.receiver.id}", {message: @message.content, recipient: @message.reciever})
         end
     end
 
     private
 
     def message_params
-        params.require(:message).permit(:content)
+        params.require(:message).permit(:content, :group_id, :recipient_id)
     end
 end

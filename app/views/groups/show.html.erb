@@ -1,18 +1,9 @@
 <h1><%= @group.name %></h1>
 <div id ="chat-interface">
-    <h2>Messages</h2>
-    <% @group.messages.each do |message| %>
-        <div>
-            <p><%= message.user.email %> said <%= message.content %></p>
-        </div>
-    <% end %>
+    <%= @group.messages %>
 </div>
 
-<%= form_with model: [@group, @message], url: group_messages_path(@group) do |form| %>
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-    <%= form.submit "Create Message" %>
-<% end %>
+<%= render "messages/form", message: Message.new, group: @group %>
 
 <%= link_to "Edit Group", edit_group_path(@group), method: :get %>
 <%= link_to "Destroy Group",group_path(@group), method: :delete %>
