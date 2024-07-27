@@ -1,6 +1,8 @@
-<h1>Chat for <%= @recipient.username%></h1>
+<h1>Chat with <%= @user.email%></h1>
 <div id = "chat-interface">
-    <%= @recipient.received_messages %>
+    <% @user.received_messages.each do |message|  %>
+       <p> <%= message.sender.email%> said <%= message.content %> </p>
+    <% end %>
 </div>
 
-<%= render "messages/form", @message: Message.new, recipient: @recipient %>
+<%= render "messages/form", message: Message.new, recipient_user: @user %>

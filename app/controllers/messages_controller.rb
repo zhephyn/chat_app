@@ -14,11 +14,15 @@ class MessagesController < ApplicationController
 
     def create
         @message = current_user.sent_messages.build(message_params)
-        @message.save
-        if @message.group
-            ActionCable.server.broadcast("group_#{@message.group.name}", {message: @message.content, group: @message.group})
+        @message.user_id = current_user.id
+        if @message.save
+            if @message.group
+                ActionCable.server.broadcast("group_#{@message.group.name}", {message: @message.content, group: @message.group})
+            else
+                ActionCable.server.broadcast("user_#{@message.recipient.id}", {message: @message.content, recipient: @message.reciever})
+            end
         else
-            ActionCable.server.broadcast("user_#{@message.receiver.id}", {message: @message.content, recipient: @message.reciever})
+            render :new
         end
     end
 

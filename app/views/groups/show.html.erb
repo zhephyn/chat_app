@@ -1,6 +1,8 @@
 <h1><%= @group.name %></h1>
 <div id ="chat-interface">
-    <%= @group.messages %>
+    <% @group.messages.each do |message| %>
+        <p><%= message.sender.email%> said <%= message.content %></p>
+    <% end %>
 </div>
 
 <%= render "messages/form", message: Message.new, group: @group %>

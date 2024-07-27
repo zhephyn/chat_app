@@ -7,8 +7,8 @@
 
   <% if @group %>
     <%= form.hidden_field :group_id, value: @group.id %>
-  <% else @recipient %>
-    <%= form.hidden_field :recipient_id, value: @recipient.id %>
+  <% else @recipient_user %>
+    <%= form.hidden_field :recipient_id, value: @user.id %>
   <% end %>
 
   <div class="actions">
