@@ -2,11 +2,12 @@ class GroupsController < ApplicationController
   before_action :authenticate_user!
   def index
     @groups = Group.all
+    @users = User.where.not(id: current_user.id)
   end
 
   def show
     @group = Group.find(params[:id])
-    @messages = Message.all
+    @messages = @group.messages
     @message = Message.new
   end
 
