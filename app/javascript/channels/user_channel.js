@@ -1,21 +1,19 @@
 import consumer from "channels/consumer"
-document.addEventListener("DOMContentLoaded", () => {
-
-// Get the recipient ID from the chat interface element
-const chatInterface = document.getElementById("chat-interface");
-const RecipientId = chatInterface.dataset.recipientId;
-consumer.subscriptions.create({channel: "UserChannel", user_id: RecipientId}, {
+consumer.subscriptions.create({ channel: "UserChannel", user_id: recipientId }, {
   connected() {
+    console.log("Connected to UserChannel");
   },
 
   disconnected() {
+    console.log("Disconnected from UserChannel");
   },
 
   received(data) {
     const messagesContainer = document.getElementById("chat-interface");
     const messageElement = document.createElement("p");
     messageElement.textContent = data.message
-    messagesContainer.appendChild(messageElement);
+      messagesContainer.appendChild(messageElement);
   }
-});
 })
+
+document.getElementById('messages').insertAdjacentHTML('beforeend', data.message)

@@ -1,12 +1,13 @@
-<h1>Chat with <%= @user.email%></h1>
-<div id = "chat-interface" data-recipient-id = "<%= @user.id %>">
-    <% @chat_history.each do |message| %>
-        <% if message.sender_id == current_user.id %>
-            <p>You said: <%= message.content %></p>
-        <% else %>
-            <p><%= message.sender.email %> said: <%= message.content %></p>
-        <% end %>
+<h1>Chat with <%= @user.email %></h1>
+<div id="chat-interface">
+  <% @chat_history.each do |message| %>
+    <% if message.sender_id == current_user.id %>
+      <p>You said: <%= message.content %></p>
+    <% else %>
+      <p><%= message.sender.email %> said: <%= message.content %></p>
     <% end %>
+  <% end %>
 </div>
 
 <%= render "messages/form", message: Message.new, recipient_user: @user %>
+
