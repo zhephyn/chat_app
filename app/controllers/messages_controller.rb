@@ -19,7 +19,7 @@ class MessagesController < ApplicationController
             if @message.group
                 ActionCable.server.broadcast("group_#{@message.group.name}", {message: @message.content, group: @message.group})
             else
-                ActionCable.server.broadcast("user_#{@message.recipient_id}", {message: @message.content, recipient: @message.recipient})
+                ActionCable.server.broadcast("user_#{@message.recipient.email}", {message: @message.content, recipient: @message.recipient})
             end
         else
             render :new
