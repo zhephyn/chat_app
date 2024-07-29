@@ -1,9 +1,9 @@
+import consumer from "channels/consumer"
+document.addEventListener("DOMContentLoaded", () => {
+
 // Get the recipient ID from the chat interface element
 const chatInterface = document.getElementById("chat-interface");
 const RecipientId = chatInterface.dataset.recipientId;
-
-import consumer from "channels/consumer"
-
 consumer.subscriptions.create({channel: "UserChannel", user_id: RecipientId}, {
   connected() {
   },
@@ -18,3 +18,4 @@ consumer.subscriptions.create({channel: "UserChannel", user_id: RecipientId}, {
     messagesContainer.appendChild(messageElement);
   }
 });
+})
