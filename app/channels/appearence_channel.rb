@@ -11,6 +11,6 @@ class AppearenceChannel < ApplicationCable::Channel
 
   private
   def broadcast_online_users
-    ActionCable.server.broadcast("appearence_channel", users: User.online)
+    ActionCable.server.broadcast("appearence_channel", {users: User.online})
   end
 end

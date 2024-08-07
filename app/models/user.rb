@@ -1,10 +1,10 @@
 class User < ApplicationRecord
-  scope :online, -> {where(online: true)} 
+  scope :online, -> {where(online_status: true)} 
   def appear
-    update(online: true)
+    update(online_status: true)
   end
   def disappear
-    update(online: false)
+    update(online_status: false)
   end
   
   has_many :user_groups
