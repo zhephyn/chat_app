@@ -3,6 +3,7 @@ class GroupsController < ApplicationController
   def index
     @groups = Group.all
     @users = User.where.not(id: current_user.id)
+    @online_users = User.online
   end
 
   def show

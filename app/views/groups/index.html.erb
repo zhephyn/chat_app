@@ -13,3 +13,10 @@
      <%= user.email %> 
     <% end %>
 <% end %>
+
+<h2>Online Users</h2>
+<% @online_users.each do |user| %>
+    <%= link_to user_path(user), method: :get do %>
+        <%= user.email %>
+    <% end %>
+<% end %>
