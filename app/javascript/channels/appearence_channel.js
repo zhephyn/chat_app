@@ -12,7 +12,7 @@ consumer.subscriptions.create("AppearenceChannel", {
   received(data) {
     const onlineUsersList = document.getElementById('online-users');
     data.users.forEach(user => {
-      const userElement = document.createElement('li');
+      const userElement = document.createElement('div');
       userElement.innerText = user.email;
       onlineUsersList.appendChild(userElement);
     });
