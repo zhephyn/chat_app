@@ -15,8 +15,10 @@
 <% end %>
 
 <h2>Online Users</h2>
-<% @online_users.each do |user| %>
-    <%= link_to user_path(user), method: :get do %>
-        <%= user.email %>
+<div id = "online-users" >
+    <% @online_users.each do |user| %>
+        <%= link_to user_path(user), method: :get do %>
+            <%= user.email %>
+        <% end %>
     <% end %>
-<% end %>
+</div>

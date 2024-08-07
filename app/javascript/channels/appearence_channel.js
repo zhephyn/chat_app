@@ -10,5 +10,12 @@ consumer.subscriptions.create("AppearenceChannel", {
   },
 
   received(data) {
+    const onlineUsersList = document.getElementById('online-users');
+    onlineUsersList.innerHTML = '';
+    data.users.forEach(user => {
+      const userElement = document.createElement('li');
+      userElement.innerText = user.email;
+      onlineUsersList.appendChild(userElement);
+    });
   }
 });
