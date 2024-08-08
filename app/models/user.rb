@@ -1,10 +1,15 @@
 class User < ApplicationRecord
   scope :online, -> {where(online_status: true)} 
   def appear
-    update(online_status: true)
+    self.update(online_status: true)
+    #ActionCable.server.broadcast("appearence_channel", {event: "appear", user_id: self.id, user_email: self.email}) 
+    #ActionCable.server.broadcast("appearence_channel", { event: "update_online_users", online_users: User.online.pluck(:email) })
+    broadcast_online_users
   end
   def disappear
-    update(online_status: false)
+    self.update(online_status: false)
+    #ActionCable.server.broadcast("appearence_channel", {event: "disappear", user_id: self.id, user_email: self.email})
+    broadcast_online_users
   end
   
   has_many :user_groups
@@ -13,4 +18,10 @@ class User < ApplicationRecord
   has_many :received_messages, class_name: "Message", foreign_key: "recipient_id"
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  
+  private
+  def broadcast_online_users
+    ActionCable.server.broadcast("appearence_channel", { event: "update_online_users", online_users: User.online.pluck(:email) })
+  end
+
 end

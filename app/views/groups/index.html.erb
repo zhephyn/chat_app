@@ -16,9 +16,6 @@
 
 <h2>Online Users</h2>
 <div id = "online-users" >
-    <% @online_users.each do |user| %>
-        <%= link_to user_path(user), method: :get do %>
-                <%= user.email %>
-        <% end %>
-    <% end %>
 </div>
+
+<%= button_to "Log out", destroy_user_session_path, method: :delete %>
