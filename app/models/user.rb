@@ -2,13 +2,10 @@ class User < ApplicationRecord
   scope :online, -> {where(online_status: true)} 
   def appear
     self.update(online_status: true)
-    #ActionCable.server.broadcast("appearence_channel", {event: "appear", user_id: self.id, user_email: self.email}) 
-    #ActionCable.server.broadcast("appearence_channel", { event: "update_online_users", online_users: User.online.pluck(:email) })
     broadcast_online_users
   end
   def disappear
     self.update(online_status: false)
-    #ActionCable.server.broadcast("appearence_channel", {event: "disappear", user_id: self.id, user_email: self.email})
     broadcast_online_users
   end
   
