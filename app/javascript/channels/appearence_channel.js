@@ -1,5 +1,4 @@
 import consumer from "channels/consumer"
-document.addEventListener("turbo:load", function(){
 consumer.subscriptions.create("AppearenceChannel", {
   connected() {
     this.perform("appear")
@@ -11,18 +10,19 @@ consumer.subscriptions.create("AppearenceChannel", {
 
   received(data) {
     var eventType = data.event;
-  const onlineUsersList = document.getElementById('online-users');
-  if (eventType === 'update_online_users') {
-    // Clear the existing list
-    onlineUsersList.innerHTML = '';
-
-    // Add each online user to the list
-    data.online_users.forEach(function(userEmail) {
-      var userElement = document.createElement('div');
+    var userId = data.user_id
+    var userEmail = data.user_email
+    const onlineUsersList = document.getElementById('online-users');
+    if (eventType === 'update') {
+      var userElement = document.createElement("div");
+      userElement.id = 'user_' + userId;
       userElement.textContent = userEmail;
       onlineUsersList.appendChild(userElement);
-    });
-  }
+    }
+    else if (eventType === "disappear") {
+      var userElement = document.getElementById("user" + userId)
+      if (userElement)
+        onlineUsersList.removeChild(userElement)
+    }
   }
 });
-})
